@@ -1,6 +1,6 @@
 {
   "name": "friend-finder",
-  "version": "1.0.0",
+  "version": "v12.1.0",
   "description": "package",
   "main": "server.js",
   "scripts": {
