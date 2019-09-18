@@ -1,6 +1,8 @@
-// JS for survey page for capturing the survey data and posting to the server
+// JS for survey page
+//Capture survey data
+//Post to server
 
-// Chosen CSS
+//CSS
 var config = {
 	'.chosen-select'           : {},
 	'.chosen-select-deselect'  : {allow_single_deselect:true},
@@ -13,7 +15,7 @@ for (var selector in config) {
 	$(selector).chosen(config[selector]);
 }
 
-// Capture the form inputs 
+// Capture form inputs 
 $("#submit").on("click", function(){
 
 	// Form validation

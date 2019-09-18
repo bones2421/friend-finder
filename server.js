@@ -3,10 +3,10 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 
-// Hey, Node - we have an express app
+// tells node we have an express app
 var app = express();
 
-// create a port for localhost(using postman in this instance)
+// create a port for localhost(using postman)
 var PORT = process.env.PORT || 8080;
 
 // express middleware for serving static files 
@@ -20,12 +20,12 @@ app.use(bodyParser.json({type: "application/*+json" }));
 app.use(bodyParser.raw({type: "application/vnd.custom-type"}));
 
 
-// all routes - that's where we are getting our data from 
+// all routes - where data is pulled from
 require("./app/routing/apiroutes.js")(app);
 
 // html routes
 require("./app/routing/htmlroutes.js")(app);
-// set up a listener
+// set up listener
 app.listen(PORT, function(){
     console.log("app listen on port: ", PORT);
 });

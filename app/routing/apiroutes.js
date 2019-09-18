@@ -1,74 +1,74 @@
 // require path so we can parse directory structures
 var path = require('path');
 
-// pull in the friends variable data file
+// pull in friends variable data file
 var friends = require('../data/friends.js');
 
 module.exports = function(app) {
 
-	// if user goes to /api/friends, send them the variable data as json
+	// if user goes to /api/friends, send variable data as json
 	app.get("/api/friends", function(req, res) {
 		res.json(friends);
 	});
 
-	// handle the post request from the survey form
+	// handle post request from survey form
 	app.post("/api/friends", function(req, res) {
 		
-		// begin by setting up the array hoding the user's answers
+		// set up array hoding user's answers
 		var surveyResults = req.body.scores;
-		// convert the values in surveyResults to integers
+		// convert values in surveyResults to integers
 		for (var i=0; i<surveyResults.length; i++) {
 			surveyResults[i] = parseInt(surveyResults[i]);
 		}
 
-		// bestDifference variable will hold the value
-		// difference between a pet in the friends array
+		// bestDifference variable will holds value
+		// difference between image in friends array
 		// and user selections, and bestMatch will hold
-		// the position in the array of the best match
-		var bestDifference = 999999; // start with a high dummy value
-		var bestMatch = 0; // assume the first pet is the best match then adjust later
+		// position in array of  best match
+		var bestDifference = 999999; // start with high dummy value
+		var bestMatch = 0; // assume first pet is best match, adjust later
 
-		// cycle through the friends array and hit every pet stored in there
+		// cycle through friends array, hit every pet stored
 		for (i=0; i < friends.length; i++) {
 
-			// define a temp value that calculates difference between user selection and
-			// the current i-th animal friend being compared against and use the
-			// difference function to calculate the difference
+			// define temp value that calculates difference between user selection and
+			// current i-th animal friend being compared against, use
+			// difference function to calculate difference
 			var tempDifference = difference(surveyResults, friends[i].scores);
 
-			// console log the difference between user choices and pet being compared
+			// console log difference between user choices and image being compared
 			console.log("difference between", surveyResults, "and", friends[i].name, friends[i].scores, "=", tempDifference);
 
-			// if the comparison shows that the current animal has a lower difference (hence is
-			// a better match) then update the value of the best difference to be the current
-			// comparison's difference, and update the best match to the current i-th position which
-			// represents the pet being compared. After this loop finishes, bestMatch will reflect
-			// the true final best match
+			// if comparison shows that current animal has lower difference (hence is
+			// a better match), update value of best difference to be current
+			// comparison's difference, and update best match to current i-th position which
+			// represents image being compared. After loop finishes, bestMatch reflects
+			//true final best match
 			if (tempDifference < bestDifference) {
 				bestDifference = tempDifference;
 				bestMatch = i;
 			}
 		}
 
-		// function to calculate the difference between two arrays
-		// it cycles through values of each array and subtracts them
-		// from values of the other aray, and applies absolute
-		// value function, then returns the total tally reflecting
-		// the deviation between the two arrays.
+		// function to calculate difference between two arrays
+		//cycles through values of each array and subtracts them
+		// from values of other aray, applies absolute
+		// value function, returns total tally reflecting
+		//deviation between the two arrays.
 		function difference(array1, array2) {
 
-			// differenceAmount holds the tally of the difference between array values
+			// differenceAmount holds the tally of difference between array values
 			var differenceAmount=0;
 			
 			for (var i=0; i<array1.length; i++) {
 				differenceAmount += Math.abs(array1[i] - array2[i]);
 			}
 			
-			// return the difference between the two arrays reflecting the deviation
+			// return difference between the two arrays reflecting deviation
 			return differenceAmount;
 		}
 
-		// send the bestMatch back to the html page in response to the post
+		// send bestMatch back to html page in response to post
 		res.send(friends[bestMatch]);
 	});
 };

@@ -1,5 +1,5 @@
-// JSON obejct holding the data of all the friends
-var friends = [{
+// JSON obejct holding data of all allies
+var allies = [{
 	"name":"Gideon",
 	"photo":"d4xyvu4-f52067df-0911-4874-8862-d9898a7a8cf7 (1).jpg",
 	"scores":[4, 3, 3, 3, 4, 3, 2, 1, 5, 3]
@@ -37,4 +37,4 @@ var friends = [{
 	"scores":[1, 1, 1, 5, 4, 1, 1, 1, 1, 1]
 }];
 
-module.exports = friends;
+module.exports = allies;

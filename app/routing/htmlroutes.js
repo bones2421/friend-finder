@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	// every other url path will take us to the home.html page
 	app.get("*", function(req, res) {
-		console.log("here")
+		console.log("here");
 		res.sendFile(path.join(__dirname, "../public/home.html"));
 	});
 };
