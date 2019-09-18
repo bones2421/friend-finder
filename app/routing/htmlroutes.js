@@ -1,13 +1,17 @@
-var path = require("path");
+// require path so we can parse directory structures
+var path = require('path');
 
+// define the routes we will be exporting to the server
 module.exports = function(app) {
-	// if user enters survey in URL or presses survey button, serves the survey HTML file
+
+	// the /survey route will take us to survey.html page
 	app.get("/survey", function(req, res) {
-		res.sendFile(path.join(__dirname, "/../public/survey.html"));
+		res.sendFile(path.join(__dirname, "../public/survey.html"));
 	});
 
-	// fallback use route for homepage
-	app.use(function(req, res) {
-		res.sendFile(path.join(__dirname, "/../public/home.html"));
+	// every other url path will take us to the home.html page
+	app.get("*", function(req, res) {
+		console.log("here")
+		res.sendFile(path.join(__dirname, "../public/home.html"));
 	});
 };
